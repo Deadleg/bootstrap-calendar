@@ -536,7 +536,7 @@ if(!String.prototype.formatNum) {
 		return h.formatNum(2) + ":" + m.formatNum(2);
 	};
 
-	Calendar.prototype._week = function(event) {
+	Calendar.prototype._week = function(hour, intervalNumber, day) {
 		this._loadTemplate('week-days');
 
 		var t = {};
@@ -548,28 +548,33 @@ if(!String.prototype.formatNum) {
 
 		$.each(this.getEventsBetween(start, end), function(k, event) {
 			event.start_day = new Date(parseInt(event.start)).getDay();
-			if(first_day == 1) {
-				event.start_day = (event.start_day + 6) % 7;
-			}
-			if((event.end - event.start) <= 86400000) {
-				event.days = 1;
-			} else {
-				event.days = ((event.end - event.start) / 86400000);
-			}
+            // Check the day, and if the time lies between the hour and the hour + interval.
+            if (event.start_day == day && 
+                event.start_hour >= self._hour(hour, intervalNumber) &&
+                event.start_hour < (intervalNumber == 0 ? self._hour(hour, intervalNumber + 1) : self._hour(hour+1, intervalNumber -1))) {
+                if(first_day == 1) {
+                    event.start_day = (event.start_day + 6) % 7;
+                }
+                if((event.end - event.start) <= 86400000) {
+                    event.days = 1;
+                } else {
+                    event.days = ((event.end - event.start) / 86400000);
+                }
 
-			if(event.start < start) {
+                if(event.start < start) {
 
-				event.days = event.days - ((start - event.start) / 86400000);
-				event.start_day = 0;
-			}
+                    event.days = event.days - ((start - event.start) / 86400000);
+                    event.start_day = 0;
+                }
 
-			event.days = Math.ceil(event.days);
+                event.days = Math.ceil(event.days);
 
-			if(event.start_day + event.days > 7) {
-				event.days = 7 - (event.start_day);
-			}
+                if(event.start_day + event.days > 7) {
+                    event.days = 7 - (event.start_day);
+                }
 
-			events.push(event);
+                events.push(event);
+            }
 		});
 		t.events = events;
 		t.cal = this;
