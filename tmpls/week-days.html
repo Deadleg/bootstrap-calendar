@@ -1,7 +1,8 @@
 <div class="cal-cell-week-day">
-    <% _.each(events, function(event) {%>
-        <div class="day-highlight dh-<%= event['class'] %>" data-event-class="<%= event['class'] %>">
+    <% var i = 0;
+       _.each(events, function(event) { %>
+        <div class="day-highlight dh-<%= event['class'] %>" data-event-class="<%= event['class'] %>" style="position: absolute; width: <%= cellWidth %>; margin-left: <%= String(parseFloat(cellWidth.replace("%", "")) * i) + "%" %>">
             <a href="<%= event.url ? event.url : 'javascript:void(0)' %>" data-event-id="<%= event.id %>" class="cal-event-week event<%= event.id %>"><%= event.title %></a>
         </div>
-    <% }); %>
+    <% i++; }); %>
 </div>
