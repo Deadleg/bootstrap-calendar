@@ -548,7 +548,7 @@ if(!String.prototype.formatNum) {
 
 		$.each(this.getEventsBetween(start, end), function(k, event) {
 			event.start_day = new Date(parseInt(event.start)).getDay();
-            // Check the day, and if the time lies between the hour and the hour + interval.
+            // Check the event day, and if the time lies between the hour and the hour + interval.
             if (event.start_day == day && 
                 event.start_hour >= self._hour(hour, intervalNumber) &&
                 event.start_hour < (intervalNumber == 0 ? self._hour(hour, intervalNumber + 1) : self._hour(hour+1, intervalNumber -1))) {
@@ -560,7 +560,23 @@ if(!String.prototype.formatNum) {
                 } else {
                     event.days = ((event.end - event.start) / 86400000);
                 }
-
+                
+                // Check if event length to find how far to expand the cell down.
+                // Minimum length 30 min
+                var cellHeight = 0;
+                var rules = document.styleSheets[0].rules || document.styleSheets[0].cssRules;
+                for (var i=0; i < rules.length; i++) {
+                    var rule = rules[i];
+                    if (rule.selectorText == ".cal-row-fluid .cal-cell-week-day") {
+                        cellHeight = rule.style.getPropertyValue("height");
+                    }
+                }
+                
+                // if length > 30 min, extend
+                if ((event.end - event.start) > 1800000) {
+                    cellHeight = (event.end - event.start) / 1800000 * cellHeight
+                }
+                
                 if(event.start < start) {
 
                     event.days = event.days - ((start - event.start) / 86400000);
