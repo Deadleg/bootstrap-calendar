@@ -535,7 +535,7 @@ if(!String.prototype.formatNum) {
 
 		return h.formatNum(2) + ":" + m.formatNum(2);
 	};
-    
+
 	Calendar.prototype._week = function(hour, intervalNumber, day) {
 		this._loadTemplate('week-days');
 
@@ -572,30 +572,12 @@ if(!String.prototype.formatNum) {
                 if(event.start_day + event.days > 7) {
                     event.days = 7 - (event.start_day);
                 }
-                
+
                 events.push(event);
             }
 		});
-
-        // find the width of each event
-        var width = 0;
-        var rules = document.styleSheets[0].rules || document.styleSheets[0].cssRules;
-        for (var i=0; i < rules.length; i++) {
-            var rule = rules[i];
-            if (rule.selectorText == ".cal-row-fluid .cal-cell-week-day") {
-                width = rule.style.getPropertyValue("width");
-            }
-        }
-
-        if (events.length > 0) {
-            width.replace("%", "")
-            width = String(parseFloat(width)/events.length) + "%"
-        } 
-        console.log(width)   
-        
 		t.events = events;
 		t.cal = this;
-        t.cellWidth = width
 		return self.options.templates['week-days'](t);
 	}
 
