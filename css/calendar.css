@@ -24,7 +24,7 @@
   box-sizing: border-box;
   float: left;
   margin-left: 0%;
-  *margin-left: -0.05213764337851929%;
+  *margin-left: -0.05213764%;
 }
 .cal-row-fluid [class*="cal-cell"]:first-child {
   margin-left: 0;
@@ -60,25 +60,28 @@
   width: 14.285714285714285%;
   *width: 14.232409381663112%;
 }
+.cal-row-fluid .cal-cell-week-time {
+  width: 7%;
+}
+.cal-row-fluid .cal-cell-week-day {
+  width: 13.2857142857%;
+}
 .cal-week-box .cal-offset7,
 .cal-row-fluid .cal-offset7,
 .cal-row-fluid .cal-offset7:first-child {
   margin-left: 100%;
   *margin-left: 99.89339019189765%;
 }
-.cal-week-box .cal-offset6,
 .cal-row-fluid .cal-offset6,
 .cal-row-fluid .cal-offset6:first-child {
   margin-left: 85.71428571428571%;
   *margin-left: 85.60767590618336%;
 }
-.cal-week-box .cal-offset5,
 .cal-row-fluid .cal-offset5,
 .cal-row-fluid .cal-offset5:first-child {
   margin-left: 71.42857142857142%;
   *margin-left: 71.32196162046907%;
 }
-.cal-week-box .cal-offset4,
 .cal-row-fluid .cal-offset4,
 .cal-row-fluid .cal-offset4:first-child {
   margin-left: 57.14285714285714%;
@@ -90,17 +93,36 @@
   margin-left: 42.857142857142854%;
   *margin-left: 42.750533049040506%;
 }
-.cal-week-box .cal-offset2,
 .cal-row-fluid .cal-offset2,
 .cal-row-fluid .cal-offset2:first-child {
   margin-left: 28.57142857142857%;
   *margin-left: 28.46481876332622%;
 }
-.cal-week-box .cal-offset1,
 .cal-row-fluid .cal-offset1,
 .cal-row-fluid .cal-offset1:first-child {
   margin-left: 14.285714285714285%;
   *margin-left: 14.17910447761194%;
+}
+.cal-week-box .cal-offset6 {
+  margin-left: 86.7142857143%;
+}
+.cal-week-box .cal-offset5 {
+  margin-left: 73.4285714286%;
+}
+.cal-week-box .cal-offset4 {
+  margin-left: 60.1428571429%;
+}
+.cal-week-box .cal-offset3 {
+  margin-left: 46.8571428571%;
+}
+.cal-week-box .cal-offset2 {
+  margin-left: 33.5714285714%;
+}
+.cal-week-box .cal-offset1 {
+  margin-left: 20.2857142857%;
+}
+.cal-week-box .cal-offset0 {
+  margin-left: 7%;
 }
 .cal-row-fluid .cal-cell1 {
   width: 14.285714285714285%;
@@ -246,6 +268,14 @@
   border-left: 8px solid #FFFFFF;
   border-bottom: 15px solid transparent;
 }
+.cal-week-box .cal-row-fluid > .cal-cell-week-time {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: bolder;
+  text-align: center;
+  border: 0px solid;
+  padding: 5px 0;
+}
 #cal-day-box {
   text-wrap: none;
 }
@@ -298,13 +328,13 @@
   border: 1px solid #e3bc08;
 }
 #cal-day-box .day-highlight.dh-event-info {
-  border: 1px solid #1e90ff;
+  border: 1px solid dodgerblue;
 }
 #cal-day-box .day-highlight.dh-event-inverse {
   border: 1px solid #1b1b1b;
 }
 #cal-day-box .day-highlight.dh-event-success {
-  border: 1px solid #006400;
+  border: 1px solid darkgreen;
 }
 #cal-day-box .day-highlight.dh-event-special {
   background-color: #ffe6ff;
@@ -335,7 +365,7 @@
   background-color: #ad2121;
 }
 .event-info {
-  background-color: #1e90ff;
+  background-color: dodgerblue;
 }
 .event-warning {
   background-color: #e3bc08;
@@ -344,7 +374,7 @@
   background-color: #1b1b1b;
 }
 .event-success {
-  background-color: #006400;
+  background-color: darkgreen;
 }
 .event-special {
   background-color: #800080;
